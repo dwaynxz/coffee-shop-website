@@ -1,0 +1,236 @@
+body {
+  margin: 0;
+}
+a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+a:hover {
+  color: #cccccc;
+}
+#logo {
+  height: 150px;
+  width: 150px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+nav {
+  margin-top: 20px;
+}
+.left {
+  width: 15%;
+  height: 100vh;
+  float: left;
+  background-color: #001433;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+}
+.right {
+  width: 85%;
+  float: left;
+  height: 100vh;
+}
+#background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+footer {
+  clear: both;
+  background-color: #ccc;
+  text-align: center;
+  height: 4vh;
+}
+.quote {
+  text-align: left;
+  font-family: "Stoic Script";
+  font-size: 20px;
+  color: white;
+}
+.mission-about {
+text-align: left;
+font-family: "Georgia";
+font-size:20px;
+color:white;
+}
+
+.mission-title {
+  text-align: center;
+  font-family: "Futura";
+  font-size: 40px;
+  color: white;
+}
+.bg-video {
+  position: absolute;
+  width: 85%;
+  height: 100%;
+  object-fit: cover;
+}
+.leftmain {
+  width: 30%;
+  position: relative;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+.bg-img {
+  width: 85%;
+  height: 100%;
+  object-fit: cover;
+}
+h1 {
+z-index: 1;
+}
+.menu-title{
+    color: #6F4E37;
+    text-align: center;
+    font-family: Playfair Display;
+}
+.item-name{
+font-family: Raleway;
+color: #2E2E2E;
+}
+.img-border{
+border: 2px solid #D9C2A7;
+padding: 5px;
+min-width: 200px;
+max-width: 200px;
+text-align: center;
+}
+.menu-sub-title{
+color: #C68B59;
+font-family: Playfair Display;
+}
+.brown-hr{
+border: 1px solid #87571b;
+}
+.next-menu-btn {
+position: fixed;
+bottom: 20px;
+right: 20px;
+}
+.back-menu-btn {
+position: fixed;
+bottom: 20px;
+}
+.cart-btn {
+position: fixed;
+bottom: 70px;
+left: 70px;
+background-color: #eda600;
+}
+.cart-btn:hover {
+background-color: #ffb300;
+}
+.add-item {
+border: solid 2px #C68B59;
+color: #C68B59;
+}
+.add-item:hover {
+background-color: #C68B59;
+color: white;
+}
+.cart-empty {
+color: #bdbdbd;
+}
+.cart-table {
+width: 100%;
+}
+td, th {
+border: 1px solid #D9C2A7;
+}
+th {
+font-family: Playfair Display;
+color: #6F4E3;
+background-color: #FAF3EB;
+}
+td {
+font-family: Lato;
+color: #2E2E2E;
+background-color: #FDF8F2;
+}
+.total {
+color: #C68B59;
+font-family: Playfair Display;
+}
+.btn-remove-item {
+width: 100%;
+height: 100%px;
+}
+.pay-btn {
+position: absolute;
+bottom: 20px;
+right: 20px;
+}
+.payment-input-field {
+border: 2px solid #D9C2A7;
+background-color: white;
+color: #2E2E2E;
+height:40px;
+width:350px;
+margin-bottom: 20px;
+}
+.payment-input-field::placeholder {
+color: #888888;
+}
+.payment-dropdown {
+width: 100px;
+height: 40px;
+border: 2px solid #D9C2A7;
+margin-bottom: 20px;
+background-color: white;
+color: #5e5e5e;
+}
+option {
+border: 2px solid #D9C2A7;
+}
+.payment-input {
+color: #6F4E37;
+font-family: Helvetica;
+margin-bottom: 5px;
+}
+.back-btn {
+position: absolute;
+left: 20px;
+bottom: 20px;
+}
+.contact-us-para {
+font-family: Open Sans;
+color: #7A6A58;
+}
+.contact-icon {
+height: 20px;
+width: 20px;
+}
+.contact-label {
+color: #6B4226;
+font-family: Open Sans;
+}
+.contact-detail {
+color: #3B3B3B;
+font-family: Open Sans;
+}
+.payment-success {
+color: #1F2A44;
+Font: Playfair Display;
+}
+.thank-message {
+font: Open Sans;
+color: #6F4E37;
+}
+.amt {
+color: #2E7D32;
+font: Poppins;
+}
+.back-to-home-btn {
+background-color: #1F2A44;
+color: #FFFFFF;
+font: Lato;
+}
+.back-to-home-btn:hover {
+background-color: #6F4E37;
+}

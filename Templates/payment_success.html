@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} Payment Success {% endblock %}
+{% block content %}
+<style>
+  .right{
+  background-color: #F5E6D3;
+  width: 85%;
+  float: left;
+  min-height: 100vh;
+  height: auto;
+    }
+</style>
+<h1 class="text-center fs-1 mt-5 payment-success"><b>Payment Successful!</b></h1>
+<div class="mx-auto mt-5" style="max-width: 200px">
+    <img src="{{ url_for('static', filename='images/payment_success.png') }}" alt="payment-success" style="width: 100%">
+</div>
+<p class="thank-message fs-4 text-center mt-5">Thank you for your order! We’re brewing it fresh for you ☕</p>
+<p class="amt fs-3 text-center mt-4">You paid: £{{"%.2f"|format(cost)}}</p>
+<div class="text-center">
+    <a href="{{ url_for('homepage') }}" class="btn btn-lg back-to-home-btn">Back to Home</a>
+</div>
+{% endblock %}

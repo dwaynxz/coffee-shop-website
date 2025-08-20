@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %} Contact Us {% endblock %}
+{% block content %}
+<style>
+  .right{
+  background-color: #F5E6D3;
+  width: 85%;
+  float: left;
+  min-height: 100vh;
+  height: auto;
+    }
+</style>
+<h1 class="menu-title fs-1 fw-bolder pt-3 pb-4">Contact Us</h1>
+<p class="contact-us-para text-center">We're open for any suggestion or just to have a chat</p>
+<div class="card mx-auto" style="max-width: 500px; background-color:#FFFDF9; border: 3px dotted #e3cbb0;">
+    <div class="card-body mt-2 ms-1">
+        <div class="mb-3">
+            <img class="contact-icon me-1" src="{{ url_for('static', filename='images/location.png') }}">
+            <span class="contact-label">Address:</span><span class="contact-detail"> N Star Ave, Swindon SN2 1DY </span>
+        </div>
+        <div class="mb-3">
+            <img class="contact-icon me-1" src="{{ url_for('static', filename='images/phone.png') }}">
+            <span class="contact-label"> Phone:</span><span class="contact-detail"> +44 1234567890</span>
+        </div>
+        <div class="mb-3">
+            <img class="contact-icon me-1" src="{{ url_for('static', filename='images/email.png') }}">
+            <span class="contact-label"> Email:</span><span class="contact-detail"> driftwoodbrew@co.uk</span>
+        </div>
+    </div>
+</div>
+<iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d691768.9444244031!2d-2.801558867182353!3d51.60582390336077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x4871443ecd2c4c6d%3A0x5e9ad1175cb7e891!2sN%20Star%20Ave%2C%20Swindon%20SN2%201DY!3m2!1d51.5692891!2d-1.7884004!5e0!3m2!1sen!2suk!4v1755644036773!5m2!1sen!2suk" width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="d-block mx-auto"></iframe>
+{% endblock %}

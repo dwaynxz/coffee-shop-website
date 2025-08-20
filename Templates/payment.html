@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body style="background-color: #F5E6D3">
+<h1 class="text-center" style="color: #6F4E37; font-family: Poppins;">Payment</h1>
+    <p class="text-center fs-5" style="color: #C68B59; font-family: Roboto">Paying: £{{'%.2f'|format(total)}}</p>
+    <div class="card mx-auto" style="max-width: 500px; background-color: #FAF3EB; border: 3px dotted #e3cbb0;">
+        <div class="card-body mt-2 ms-1">
+            <label for="name" class="payment-input">Name on card</label><br>
+            <input type="text" id="name" placeholder="John Doe" class="payment-input-field">
+            <br>
+            <label for="card-num" class="payment-input">Card Number</label><br>
+            <input type="text" inputmode="numeric"  maxlength="16" id="card-num" placeholder="0000 0000 0000 0000" class="payment-input-field">
+            <br>
+            <label for="card-exp" class="payment-input">Card expiration date</label><br>
+            <select id="card-exp" class="payment-dropdown">
+                {% for month in months %}
+                    <option>{{month}}</option>
+                {% endfor %}
+            </select>
+            <select class="payment-dropdown">
+                {% for year in years %}
+                    <option>{{year}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="cvv" class="payment-input">Card Security Code</label><br>
+            <input type="password" maxlength="3" id="cvv" class="payment-input-field" placeholder="Code">
+            <form action="{{ url_for('payment_success') }}" method="post">
+                <input type="hidden" name="cost" value="{{total}}">
+                <button type="submit" class="btn btn-success pay-btn">Pay</button>
+            </form>
+            <br>
+            <br>
+            <a href="{{ url_for('cart') }}" class="btn btn-danger back-btn">Back</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .right{
+  background-color: #F5E6D3;
+  width: 85%;
+  float: left;
+  min-height: 100vh;
+  height: auto;
+    }
+</style>
+<h1 class="menu-title fs-1 fw-bolder pt-3">Cart</h1>
+<div class="card mx-auto mt-4" style="max-width: 1000px; min-height: 400px;background-color: #F5E6D3">
+  <div class="card-body">
+    {% if length_cart == 0 %}
+      <p class="cart-empty fs-2 text-center">Your cart is empty</p>
+      </div>
+    {% else %}
+        <table class="cart-table text-center">
+          <tr>
+            <th>
+              Item
+            </th>
+            <th>
+              Price
+            </th>
+          </tr>
+          {% for item in my_cart %}
+            <tr>
+              <td>{{item['item']}}</td>
+              <td>£{{'%.2f'|format(item['price'])}}</td>
+              <td style="width: 50px">
+                <form action="{{ url_for('remove_item') }}" method="post">
+                  <input type="hidden" name="item" value="{{item['item']}}">
+                  <button type="submit" class=" btn btn-danger btn-remove-item">Remove</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        <form action="payment" method="post">
+          <input type="hidden" name="total" value="{{total}}"><p class="total fs-4">Total: £{{'%.2f'|format(total)}}</p>
+          <button type="submit" class="btn btn-success pay-btn" style="color:white;">Buy</button>
+        </form>
+    {% endif %}
+  </div>
+{% endblock %}

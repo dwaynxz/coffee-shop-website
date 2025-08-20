@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %} Menu {% endblock %}
+{% block content %}
+<style>
+  .right{
+  background-color: #F5E6D3;
+  width: 85%;
+  float: left;
+  min-height: 100vh;
+  height: auto;
+    }
+</style>
+<h1 class="menu-title fs-1 fw-bolder pt-3 pb-4">Menu</h1>
+<h2 class="menu-sub-title fs-3 fw-bold text-center">Drinks</h2>
+<div class="ms-5 d-flex flex-wrap mb-0"  >
+  {% for key, item in drinks.items() %}
+    <div class="img-border p-1  text-center d-inline-block" style="max-width: 200px;">
+      <img src="{{ url_for('static', filename='images/'+key+'.png') }}" alt="item" class="mb-3" style="height:150px;">
+      <p class="item-name"> {{item['name']}} </p>
+      <p class="item-name">£{{'%.2f'|format(item['price'])}}</p>
+      <form action="{{ url_for('add_cart') }}" method="post">
+        <input type="hidden" name="item" value="{{item['name']}}">
+        <input type="hidden" name="price" value="{{item['price']}}">
+        <button type="submit" class="add-item">Add to cart</button>
+      </form>
+    </div>
+  {% endfor %}
+</div>
+<a href="{{ url_for('menu_2') }}" class="btn btn-outline-dark btn-lg next-menu-btn">➡</a>
+<a href="{{ url_for('cart') }}" class="btn cart-btn rounded-circle btn-lg">🛒</a>
+<br><br>
+{% endblock %}
