@@ -12,7 +12,7 @@
     <div class="main-div">
         <div class="user-actions">
           <a href="#" class="btn btn-login">Login</a>
-          <a href="#" class="btn btn-register">Register</a>
+          <a href="{{ url_for('register') }}" class="btn btn-register">Register</a>
       </div>
       <div class="left">
         <img id="logo" src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo" />

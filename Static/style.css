@@ -268,3 +268,40 @@ background-color: #6F4E37;
     background-color: #38220F;
     color: #F8F4E1;
 }
+
+.register-form {
+    max-width: 450px;
+}
+.form-control:focus {
+    box-shadow: 0 0 5px #E48238;
+    border-color: #C9B194;
+    background-color: #F8F4E1;
+    color: #38220F;
+}
+.form-control {
+    background-color: #F8F4E1;
+    border-color: #C9B194;
+}
+.form-label {
+    color: #38220F;
+    margin-bottom: 10px;
+}
+.register-form {
+    border: 1px solid #C9B194;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.btn-register-form {
+  text-decoration: none;
+  color: #fff;
+  background-color: #E48238;
+  font-weight: 400;
+  font-size: 20px;
+  border: none;
+}
+.btn-register-form:hover,
+.btn-register-form:active {
+  background-color: #CC6A20;
+  color: #FFFFFF
+}
