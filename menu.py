@@ -6,7 +6,7 @@ drinks = {
     "espresso": {
     "name": "Espresso",
     "price": 3.0,
-    },
+    },  
     "matcha": {
     "name": "Matcha",
     "price": 5.0
