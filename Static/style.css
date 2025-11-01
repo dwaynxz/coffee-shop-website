@@ -54,27 +54,24 @@ footer {
   text-align: left;
   font-family: "Stoic Script";
   font-size: 20px;
-  color: white;
+  color: #C68B59;
+  line-height: 2;
 }
 .mission-about {
 text-align: left;
 font-family: "Georgia";
 font-size:20px;
-color:white;
+color: #4D3A2E;
+line-height: 2;
 }
 
 .mission-title {
   text-align: center;
   font-family: "Futura";
   font-size: 40px;
-  color: white;
+  color: #38220F;
 }
-.bg-video {
-  position: absolute;
-  width: 85%;
-  height: 100%;
-  object-fit: cover;
-}
+
 .leftmain {
   width: 30%;
   position: relative;

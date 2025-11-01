@@ -1,17 +1,14 @@
 {% extends "base.html" %}
 {% block title %} About Us {% endblock %}
 {% block content %}
-<video autoplay muted loop class="bg-video">
-  <source src="{{ url_for('static', filename='videos/coffee.mp4') }}" type="video/mp4" />
-</video>
-<div class="leftmain">
+<div class="leftmain w-50 mx-auto mt-5">
   <section>
-    <h2>Our Vision</h2>
+    <h2 class="mission-title mt-2">Our Vision</h2>
     <p class="quote">“At Driftwood Brew, every cup tells a story.</p>
     <p class="quote">We’re more than just coffee — we’re a cozy space to connect, unwind, and</p>
     <p class="quote">enjoy the simple pleasures of life. Come in, take a seat, and feel right at home.”</p>
   </section>
-  <section>
+  <section class="mt-5">
     <h2 class="mission-title">Our Mission</h2>
     <p class="mission-about">At Driftwood Brew, our mission is to serve exceptional coffee crafted with care in a welcoming space where everyone can relax, connect, and enjoy life’s simple pleasures. We’re dedicated to creating a cozy atmosphere that feels like a second home, where quality and community come together in every cup.</p>
   </section>
