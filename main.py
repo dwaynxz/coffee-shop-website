@@ -72,4 +72,10 @@ def payment_success():
     my_cart.clear()
     return render_template("payment_success.html", cost=cost)
 
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
+
+
 app.run(debug=True)

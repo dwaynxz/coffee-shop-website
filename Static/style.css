@@ -35,7 +35,9 @@ nav {
 .right {
   width: 85%;
   float: left;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
+  background-color: #F5E6D3;
 }
 #background {
   width: 100%;
