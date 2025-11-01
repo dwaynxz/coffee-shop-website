@@ -302,3 +302,14 @@ background-color: #6F4E37;
   background-color: #CC6A20;
   color: #FFFFFF
 }
+.btn-login-form {
+    color: #F8F4E1;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 20px;
+    background-color: #38220F;
+}
+.btn-login-form:hover{
+    background-color: #4c3827;
+    color: #F8F4E1;
+}
