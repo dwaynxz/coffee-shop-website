@@ -259,12 +259,12 @@ background-color: #6F4E37;
     background-color: #CC6A20;
 }
 .btn-login:link, .btn-login:visited, .btn-login:hover, .btn-login:active {
-    color: #F8F4E1;
+    color: #38220F;
     text-decoration: none;
     font-weight: 400;
     font-size: 20px;
 }
 .btn-login:hover, .btn-login-active {
-    background-color: #F8F4E1;
-    color: #001433;
+    background-color: #38220F;
+    color: #F8F4E1;
 }
