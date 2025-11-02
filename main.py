@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 from menu import drinks, breakfast, desserts
+
 app = Flask(__name__)
+db = SQLAlchemy(app)
 
 my_cart = []
 
