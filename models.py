@@ -13,6 +13,7 @@ class User(db.Model):
 
 class Cart(db.Model):
     __tablename__ = "Carts"
+    cart_id = db.Column(db.Integer, primary_key=True, nullable=False)
     user_id = db.Column(db.Integer, db.Foreignkey("user.id"), nullable=False)
     paid = db.Column(db.String, nullable=False)
     cart_item = db.relationship("CartItem", backref="cart", lazy=True)
