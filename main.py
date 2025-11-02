@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from menu import drinks, breakfast, desserts
+import secrets
+
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = secrets.token_hex(32)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///coffee_shop_db.db"
 db = SQLAlchemy(app)
+from models import User, Cart, CartItem, MenuItem
 
 my_cart = []
 
@@ -83,4 +88,5 @@ def register():
 def login():
     return render_template("login.html")
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
