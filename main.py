@@ -1,14 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from menu import drinks, breakfast, desserts
 import secrets
-from extensions import db
+from extensions import db, bcrypt
 
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(32)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///coffee_shop_db.db"
 db.init_app(app)
+bcrypt.init_app(app)
 from models import User, Cart, CartItem, MenuItem
 
 my_cart = []
@@ -81,8 +82,34 @@ def payment_success():
     my_cart.clear()
     return render_template("payment_success.html", cost=cost)
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
+    if request.method == "POST":
+        forename = request.form.get("forename")
+        if not forename:
+            flash("Forename field can't be empty", "error")
+        else:
+            lastname = request.form.get("lastname")
+            if not lastname:
+                flash("Lastname filed can't be empty", "error")
+                return render_template("register.html", forename=forename)
+            else:
+                email = request.form.get("email")
+                if not email:
+                    flash("Email field can't be empty", "error")
+                    return render_template("register.html", forename=forename, lastname=lastname)
+                else:
+                    password = request.form.get("password")
+                    if not password:
+                        flash("Password field can't be empty", "error")
+                        return render_template("register.html", forename=forename, lastname=lastname, email=email)
+                    else:
+                        hashed_password = bcrypt.generate_password_hash(password)
+                        user = User(forename=forename, lastname=lastname, email=email, password=hashed_password)
+                        db.session.add(user)
+                        db.session.commit()
+                        flash("Registered Successfully", "success")
+                        return redirect(url_for("login"))
     return render_template("register.html")
 
 @app.route("/login")
