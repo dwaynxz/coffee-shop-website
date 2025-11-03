@@ -87,29 +87,38 @@ def register():
     if request.method == "POST":
         forename = request.form.get("forename")
         if not forename:
-            flash("Forename field can't be empty", "error")
+            flash("Forename field can't be empty", "danger")
         else:
             lastname = request.form.get("lastname")
             if not lastname:
-                flash("Lastname filed can't be empty", "error")
+                flash("Lastname filed can't be empty", "danger")
                 return render_template("register.html", forename=forename)
             else:
                 email = request.form.get("email")
                 if not email:
-                    flash("Email field can't be empty", "error")
+                    flash("Email field can't be empty", "danger")
                     return render_template("register.html", forename=forename, lastname=lastname)
                 else:
                     password = request.form.get("password")
                     if not password:
-                        flash("Password field can't be empty", "error")
+                        flash("Password field can't be empty", "danger")
                         return render_template("register.html", forename=forename, lastname=lastname, email=email)
                     else:
-                        hashed_password = bcrypt.generate_password_hash(password)
-                        user = User(forename=forename, lastname=lastname, email=email, password=hashed_password)
-                        db.session.add(user)
-                        db.session.commit()
-                        flash("Registered Successfully", "success")
-                        return redirect(url_for("login"))
+                        confirm_password = request.form.get("confirm_password")
+                        if not confirm_password:
+                            flash("Confirm Password field can't be empty", "danger")
+                            return render_template("register.html", forename=forename, lastname=lastname, email=email, password=password)
+                        else:
+                            if confirm_password != password:
+                                flash("Passwords do not match.", "danger")
+                                return render_template("register.html", forename=forename, lastname=lastname, email=email, password=password)
+                            else:
+                                hashed_password = bcrypt.generate_password_hash(password)
+                                user = User(forename=forename, lastname=lastname, email=email, password=hashed_password)
+                                db.session.add(user)
+                                db.session.commit()
+                                flash("Registered Successfully", "success")
+                                return redirect(url_for("login"))
     return render_template("register.html")
 
 @app.route("/login")
