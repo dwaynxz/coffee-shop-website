@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %} Register {% endblock %}
+{% block title %} Login {% endblock %}
 
 {% block content %}
 <div class="right d-flex flex-column justify-content-center align-items-center" style="height: 80vh;">
     <h1 class="menu-title">Login</h1>
     <form class="register-form w-50 p-3" method="post" action="{{ url_for('login') }}">
         <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="email"><br>
+        <input type="email" class="form-control" name="email" value="{{ email if email else '' }}"><br>
         <label class="form-label">Password</label>
-        <input type="password" class="form-control" name="password"><br>
+        <input type="password" class="form-control" name="password" value="{{ password if password else '' }}"><br>
         <button type="submit" class="btn btn-login-form">Login</button>
     </form>
 </div>
