@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from menu import drinks, breakfast, desserts
 import secrets
 from extensions import db, bcrypt, login_manager
+from flask_login import login_user, logout_user, current_user
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(32)
@@ -128,7 +129,25 @@ def register():
 
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    email = request.form.get("email")
+    password = request.form.get("password")
+    if not email:
+        flash("Email field can't be empty", "danger")
+        return redirect(url_for("login"))
+    if not password:
+        flash("Password field can't be empty")
+        return render_template("login.html", email=email)
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        flash("Email doesn't exist. Please register", "danger")
+        return render_template("login.html", email=email)
+    check_password = bcrypt.check_password_hash(user.password, password)
+    if not check_password:
+        flash("Incorrect Password", "danger")
+        return render_template("login.html", email=email)
+    login_user(user)
+    flash("Logged in successfully", "success")
+    return redirect(url_for("menu"))
 
 if __name__ == "__main__":
     app.run(debug=True)
