@@ -24,6 +24,17 @@
         </nav>
       </div>
       <div class="right">
+        <div class="mx-auto mt-5" style="max-width: 600px;max-height:10px">
+          {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+      </div>
           {% block content %}
           {% endblock %}
       </div>
