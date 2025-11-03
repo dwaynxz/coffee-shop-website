@@ -8,7 +8,7 @@ class User(db.Model):
     lastname = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
-    cart = db.relationship("cart", backref="user", lazy=True)
+    cart = db.relationship("Cart", backref="user", lazy=True)
 
 class Cart(db.Model):
     __tablename__ = "Carts"
@@ -30,4 +30,5 @@ class MenuItem(db.Model):
     price = db.Column(Numeric(5, 2), nullable=False)
     image_url = db.Column(db.String, nullable=False)
     cart_item = db.relationship("CartItem", backref="menuitem", lazy=True)
+    category = db.Column(db.String, nullable=False)
 
