@@ -1,7 +1,8 @@
 from extensions import db 
 from sqlalchemy import Numeric
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "Users"
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     forename = db.Column(db.String, nullable=False)
