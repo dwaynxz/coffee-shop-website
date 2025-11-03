@@ -2,14 +2,15 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from menu import drinks, breakfast, desserts
 import secrets
-from extensions import db, bcrypt
-
+from extensions import db, bcrypt, login_manager
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(32)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///coffee_shop_db.db"
 db.init_app(app)
 bcrypt.init_app(app)
+login_manager.init_app(app)
+login_manager.login_view = "login"
 from models import User, Cart, CartItem, MenuItem
 
 my_cart = []
@@ -19,6 +20,10 @@ def sum_cart(user_cart):
     for item in user_cart:
         total += item["price"]
     return total
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.get(User, int(user_id))
 
 @app.route("/")
 @app.route("/home")
