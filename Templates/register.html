@@ -7,15 +7,15 @@
     <h1 class="menu-title">Register </h1>
     <form class="register-form w-50 p-3" method="post" action="{{ url_for('register') }}">
         <label class="form-label">Forename</label>
-        <input type="text" class="form-control" name="forename"><br>
+        <input type="text" class="form-control" name="forename" value="{{ forename if forename else '' }}"><br>
         <label class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="lastname"><br>
+        <input type="text" class="form-control" name="lastname" value="{{ lastname if lastname else '' }}"><br>
         <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="email"><br>
+        <input type="email" class="form-control" name="email" value="{{ email if email else '' }}"><br>
         <label class="form-label">Password</label>
-        <input type="password" class="form-control" name="password"><br>
+        <input type="password" class="form-control" name="password" value="{{ password if passsword else '' }}"><br>
         <label class="form-label">Confirm Password</label>
-        <input type="password" class="form-control"><br>
+        <input type="password" name="confirm_password" class="form-control"><br>
         <button type="submit" class="btn btn-register-form">Register</button>
     </form>
 </div>
