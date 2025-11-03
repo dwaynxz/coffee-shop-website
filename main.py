@@ -2,12 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from menu import drinks, breakfast, desserts
 import secrets
+from extensions import db
 
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(32)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///coffee_shop_db.db"
-db = SQLAlchemy(app)
+db.init_app(app)
 from models import User, Cart, CartItem, MenuItem
 
 my_cart = []
