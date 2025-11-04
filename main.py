@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from menu import drinks, breakfast, desserts
 import secrets
@@ -86,6 +86,7 @@ def remove_item():
 def payment():
     total = request.form.get("total")
     total = float(total)
+    session["total"] = total
     months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     years = [i for i in range(2025,2036)]
     return render_template("payment.html", total=total, months=months, years=years)
@@ -97,10 +98,23 @@ def payment_success():
     name = request.form.get("name")
     card_num = request.form.get("card_num")
     security_code = request.form.get("cvv")
+    if not name:
+        flash("Name field can't be empty", "danger")
+        return render_template("payment.html", total=session["total"])
+    if not card_num:
+        flash("Card number field can't be empty", "danger")
+        return render_template("payment.html", name=name, total=session["total"])
+    if not security_code:
+        flash("Cvv field can't be empty", "danger")
+        return render_template("payment.html", name=name, card_num=card_num, total=session["total"])
+    if len(card_num) < 16:
+        flash("Invalid card number", "danger")
+        return render_template("payment.html", name=name, card_num=card_num, cvv=security_code, total=session["total"])
     payment_info = PaymentInfo(name=name, card_num=card_num, cvv=security_code, user_id=current_user.id)
     db.session.add(payment_info)
     db.session.commit()
     my_cart.clear()
+    session.pop("total")
     return render_template("payment_success.html", cost=cost)
 
 @app.route("/register", methods=["GET", "POST"])

@@ -7,16 +7,27 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body style="background-color: #F5E6D3">
+<div class="mx-auto mt-5" style="max-width: 600px;max-height:10px">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
 <h1 class="text-center" style="color: #6F4E37; font-family: Poppins;">Payment</h1>
     <p class="text-center fs-5" style="color: #C68B59; font-family: Roboto">Paying: £{{'%.2f'|format(total)}}</p>
     <div class="card mx-auto" style="max-width: 500px; background-color: #FAF3EB; border: 3px dotted #e3cbb0;">
         <div class="card-body mt-2 ms-1">
             <form action="{{ url_for('payment_success') }}" method="post">
                 <label for="name" class="payment-input">Name on card</label><br>
-                <input type="text" id="name" name="name" placeholder="John Doe" class="payment-input-field">
+                <input type="text" id="name" name="name" placeholder="John Doe" class="payment-input-field" value="{{ name if name else '' }}">
                 <br>
                 <label for="card-num" class="payment-input">Card Number</label><br>
-                <input type="text" inputmode="numeric" name="card_num"  maxlength="16" id="card-num" placeholder="0000 0000 0000 0000" class="payment-input-field">
+                <input type="text" inputmode="numeric" name="card_num"  maxlength="16" id="card-num" placeholder="0000 0000 0000 0000" class="payment-input-field" value="{{ card_num if card_num else '' }}">
                 <br>
                 <label for="card-exp" class="payment-input">Card expiration date</label><br>
                 <select id="card-exp" class="payment-dropdown">
@@ -31,7 +42,7 @@
                 </select>
                 <br>
                 <label for="cvv" class="payment-input">Card Security Code</label><br>
-                <input type="password" maxlength="3" id="cvv" class="payment-input-field" name="cvv" placeholder="Code">
+                <input type="password" maxlength="3" id="cvv" class="payment-input-field" name="cvv" placeholder="Code" value="{{ cvv if cvv else '' }}">
                 <button type="submit">Pay</button>
                 <input type="hidden" name="cost" value="{{total}}">
                 <button type="submit" class="btn btn-success pay-btn">Pay</button>
