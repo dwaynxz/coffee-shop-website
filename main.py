@@ -40,15 +40,18 @@ def contact():
 
 @app.route("/menu")
 def menu():
-    return render_template("menu.html", drinks=drinks)
+    menu_drinks = MenuItem.query.filter_by(category="drinks")
+    return render_template("menu.html",  menu_drinks=menu_drinks)
 
 @app.route("/menu-2")
 def menu_2():
-    return render_template("menu_2.html", breakfast=breakfast)
+    menu_breakfast = MenuItem.query.filter_by(category="breakfast")
+    return render_template("menu_2.html", menu_breakfast=menu_breakfast)
 
 @app.route("/menu-3")
 def menu_3():
-    return render_template("menu_3.html", desserts=desserts)
+    menu_desserts = MenuItem.query.filter_by(category="desserts")
+    return render_template("menu_3.html", menu_desserts=menu_desserts)
 
 @app.route("/cart")
 def cart():
