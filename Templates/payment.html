@@ -11,27 +11,28 @@
     <p class="text-center fs-5" style="color: #C68B59; font-family: Roboto">Paying: £{{'%.2f'|format(total)}}</p>
     <div class="card mx-auto" style="max-width: 500px; background-color: #FAF3EB; border: 3px dotted #e3cbb0;">
         <div class="card-body mt-2 ms-1">
-            <label for="name" class="payment-input">Name on card</label><br>
-            <input type="text" id="name" placeholder="John Doe" class="payment-input-field">
-            <br>
-            <label for="card-num" class="payment-input">Card Number</label><br>
-            <input type="text" inputmode="numeric"  maxlength="16" id="card-num" placeholder="0000 0000 0000 0000" class="payment-input-field">
-            <br>
-            <label for="card-exp" class="payment-input">Card expiration date</label><br>
-            <select id="card-exp" class="payment-dropdown">
-                {% for month in months %}
-                    <option>{{month}}</option>
-                {% endfor %}
-            </select>
-            <select class="payment-dropdown">
-                {% for year in years %}
-                    <option>{{year}}</option>
-                {% endfor %}
-            </select>
-            <br>
-            <label for="cvv" class="payment-input">Card Security Code</label><br>
-            <input type="password" maxlength="3" id="cvv" class="payment-input-field" placeholder="Code">
             <form action="{{ url_for('payment_success') }}" method="post">
+                <label for="name" class="payment-input">Name on card</label><br>
+                <input type="text" id="name" name="name" placeholder="John Doe" class="payment-input-field">
+                <br>
+                <label for="card-num" class="payment-input">Card Number</label><br>
+                <input type="text" inputmode="numeric" name="card_num"  maxlength="16" id="card-num" placeholder="0000 0000 0000 0000" class="payment-input-field">
+                <br>
+                <label for="card-exp" class="payment-input">Card expiration date</label><br>
+                <select id="card-exp" class="payment-dropdown">
+                    {% for month in months %}
+                        <option>{{month}}</option>
+                    {% endfor %}
+                </select>
+                <select class="payment-dropdown">
+                    {% for year in years %}
+                        <option>{{year}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <label for="cvv" class="payment-input">Card Security Code</label><br>
+                <input type="password" maxlength="3" id="cvv" class="payment-input-field" name="cvv" placeholder="Code">
+                <button type="submit">Pay</button>
                 <input type="hidden" name="cost" value="{{total}}">
                 <button type="submit" class="btn btn-success pay-btn">Pay</button>
             </form>
