@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from menu import drinks, breakfast, desserts
 import secrets
 from extensions import db, bcrypt, login_manager
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user,  login_required
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(32)
@@ -59,12 +59,18 @@ def cart():
     total = sum_cart(my_cart)
     return render_template("cart.html", my_cart=my_cart, length_cart=length_cart, total=total)
 
+
 @app.route("/add-cart", methods=["POST", "GET"])
+@login_required
 def add_cart():
+    item_id = request.form.get("item_id")
     item = request.form.get("item")
     price = request.form.get("price")
     my_cart.append({"item": item,
                  "price": float(price)})
+    cart_item = CartItem(cart_id=current_user.cart[0].cart_id, menu_item=int(item_id))
+    db.session.add(cart_item)
+    db.session.commit()
     return redirect(url_for("menu"))
 
 @app.route("/remove-item", methods=["POST"])
@@ -150,6 +156,11 @@ def login():
             flash("Incorrect Password", "danger")
             return render_template("login.html", email=email)
         login_user(user)
+        check_cart = Cart.query.filter_by(user_id=user.id).filter_by().first()
+        if not check_cart:
+            cart = Cart(user_id=user.id, paid="False")
+            db.session.add(cart)
+            db.session.commit()
         flash("Logged in successfully", "success")
         return redirect(url_for("menu"))
     return render_template("login.html")
