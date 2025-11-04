@@ -4,14 +4,14 @@
 <h1 class="menu-title fs-1 fw-bolder pt-3 pb-4"></h1>
 <h2 class="menu-sub-title fs-3 fw-bold text-center">Breakfast</h2>
 <div class="ms-5 d-flex flex-wrap mb-0"  >
-  {% for key, item in breakfast.items() %}
+  {% for breakfast in menu_breakfast %}
     <div class="img-border p-1  text-center" style="max-width: 300px;">
-      <img src="{{ url_for('static', filename='images/'+key+'.png') }}" alt={{item['name']}} class="mb-3" style="height:150px;">
-      <p class="item-name"> {{item['name']}} </p>
-      <p class="item-name">£{{'%.2f'|format(item['price'])}}</p>
+      <img src="{{ url_for('static', filename='images/' ~ breakfast.image_url) }}" alt={{breakfast.name}} class="mb-3" style="height:150px;">
+      <p class="item-name"> {{breakfast.name}} </p>
+      <p class="item-name">£{{breakfast.price}}</p>
       <form action="{{ url_for('add_cart') }}" method="post">
-        <input type="hidden" name="item" value="{{item['name']}}">
-        <input type="hidden" name="price" value="{{item['price']}}">
+        <input type="hidden" name="item" value="{{breakfast.name}}">
+        <input type="hidden" name="price" value="{{breakfast.price}}">
         <button type="submit" class="add-item">Add to cart</button>
       </form>
     </div>
