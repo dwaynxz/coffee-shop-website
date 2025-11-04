@@ -68,7 +68,7 @@ def add_cart():
     price = request.form.get("price")
     my_cart.append({"item": item,
                  "price": float(price)})
-    cart_item = CartItem(cart_id=current_user.cart[0].cart_id, menu_item=int(item_id))
+    cart_item = CartItem(cart_id=current_user.cart[0].cart_id, menu_item_id=int(item_id))
     db.session.add(cart_item)
     db.session.commit()
     return redirect(url_for("menu"))
@@ -178,7 +178,7 @@ def login():
         login_user(user)
         check_cart = Cart.query.filter_by(user_id=user.id).filter_by().first()
         if not check_cart:
-            cart = Cart(user_id=user.id, paid="False")
+            cart = Cart(user_id=user.id, paid=False, total=0)
             db.session.add(cart)
             db.session.commit()
         flash("Logged in successfully", "success")
