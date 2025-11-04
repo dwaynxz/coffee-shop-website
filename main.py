@@ -55,9 +55,17 @@ def menu_3():
 
 @app.route("/cart")
 def cart():
-    length_cart = len(my_cart)
-    total = sum_cart(my_cart)
-    return render_template("cart.html", my_cart=my_cart, length_cart=length_cart, total=total)
+    cart = Cart.query.filter_by(user_id=current_user.id).first()
+    if cart:
+        cart_items = cart.cart_item
+        total = 0
+        if cart_items:
+            for item in cart_items:
+                total += item.menuitem.price
+        cart.total = float(total)
+        db.session.commit()
+        cart_length = len(cart_items)
+    return render_template("cart.html", cart=cart,cart_length=cart_length ,cart_items=cart_items)
 
 
 @app.route("/add-cart", methods=["POST", "GET"])
@@ -84,9 +92,8 @@ def remove_item():
 
 @app.route("/payment", methods=["POST"])
 def payment():
-    total = request.form.get("total")
-    total = float(total)
-    session["total"] = total
+    cart = Cart.query.filter_by(user_id=current_user.id).first()
+    total = cart.total
     months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     years = [i for i in range(2025,2036)]
     return render_template("payment.html", total=total, months=months, years=years)
