@@ -33,3 +33,10 @@ class MenuItem(db.Model):
     cart_item = db.relationship("CartItem", backref="menuitem", lazy=True)
     category = db.Column(db.String, nullable=False)
 
+class PaymentInfo(db.Model):
+    __tablename__ = "Payment Info"
+    payment_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String, nullable=False)
+    card_num = db.Column(db.String, nullable=False)
+    cvv = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
