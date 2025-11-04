@@ -12,7 +12,7 @@ db.init_app(app)
 bcrypt.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = "login"
-from models import User, Cart, CartItem, MenuItem
+from models import User, Cart, CartItem, MenuItem, PaymentInfo
 
 my_cart = []
 
@@ -94,6 +94,12 @@ def payment():
 def payment_success():
     cost = request.form.get("cost")
     cost = float(cost)
+    name = request.form.get("name")
+    card_num = request.form.get("card_num")
+    security_code = request.form.get("cvv")
+    payment_info = PaymentInfo(name=name, card_num=card_num, cvv=security_code, user_id=current_user.id)
+    db.session.add(payment_info)
+    db.session.commit()
     my_cart.clear()
     return render_template("payment_success.html", cost=cost)
 
