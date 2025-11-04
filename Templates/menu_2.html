@@ -12,6 +12,7 @@
       <form action="{{ url_for('add_cart') }}" method="post">
         <input type="hidden" name="item" value="{{breakfast.name}}">
         <input type="hidden" name="price" value="{{breakfast.price}}">
+        <input type="hidden" name="item_id" value="{{breakfast.item_id}}">
         <button type="submit" class="add-item">Add to cart</button>
       </form>
     </div>
