@@ -14,7 +14,6 @@ login_manager.init_app(app)
 login_manager.login_view = "login"
 from models import User, Cart, CartItem, MenuItem, PaymentInfo
 
-my_cart = []
 
 def sum_cart(user_cart):
     total = 0
