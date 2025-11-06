@@ -14,13 +14,6 @@ login_manager.init_app(app)
 login_manager.login_view = "login"
 from models import User, Cart, CartItem, MenuItem, PaymentInfo
 
-
-def sum_cart(user_cart):
-    total = 0
-    for item in user_cart:
-        total += item["price"]
-    return total
-
 def get_unpaid_cart(user_id):
     return Cart.query.filter_by(user_id=user_id, paid=False).first()
 
