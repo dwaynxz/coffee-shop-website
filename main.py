@@ -74,6 +74,7 @@ def add_cart():
     return redirect(url_for("menu"))
 
 @app.route("/remove-item", methods=["POST"])
+@login_required
 def remove_item():
     item = request.form.get("item")
     cart_item = db.session.get(CartItem, int(item))
@@ -82,6 +83,7 @@ def remove_item():
     return redirect(url_for("cart"))
 
 @app.route("/payment", methods=["POST"])
+@login_required
 def payment():
     cart = Cart.query.filter_by(user_id=current_user.id).first()
     total = cart.total
@@ -90,6 +92,7 @@ def payment():
     return render_template("payment.html", total=total, months=months, years=years)
 
 @app.route("/payment-success", methods=["POST"])
+@login_required
 def payment_success():
     cost = request.form.get("cost")
     cost = float(cost)
@@ -188,6 +191,7 @@ def login():
     return render_template("login.html")
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
     flash("Logged out successfully", "success")
