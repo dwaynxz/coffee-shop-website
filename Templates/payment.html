@@ -43,7 +43,6 @@
                 <br>
                 <label for="cvv" class="payment-input">Card Security Code</label><br>
                 <input type="password" maxlength="3" id="cvv" class="payment-input-field" name="cvv" placeholder="Code" value="{{ cvv if cvv else '' }}">
-                <button type="submit">Pay</button>
                 <input type="hidden" name="cost" value="{{total}}">
                 <button type="submit" class="btn btn-success pay-btn">Pay</button>
             </form>
