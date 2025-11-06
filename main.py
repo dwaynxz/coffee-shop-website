@@ -71,11 +71,7 @@ def cart():
 @login_required
 def add_cart():
     item_id = request.form.get("item_id")
-    item = request.form.get("item")
-    price = request.form.get("price")
-    my_cart.append({"item": item,
-                 "price": float(price)})
-    cart_item = CartItem(cart_id=current_user.cart[0].cart_id, menu_item_id=int(item_id))
+    cart_item = CartItem(cart_id=current_user.cart[0].cart_id, menu_item_id=int(item_id)) #
     db.session.add(cart_item)
     db.session.commit()
     return redirect(url_for("menu"))
@@ -83,10 +79,9 @@ def add_cart():
 @app.route("/remove-item", methods=["POST"])
 def remove_item():
     item = request.form.get("item")
-    for  i, menu_item in enumerate(my_cart):
-        if menu_item["item"] == item:
-            my_cart.pop(i)
-            break
+    cart_item = db.session.get(CartItem, int(item))
+    db.session.delete(cart_item)
+    db.session.commit()
     return redirect(url_for("cart"))
 
 @app.route("/payment", methods=["POST"])
@@ -119,8 +114,8 @@ def payment_success():
     payment_info = PaymentInfo(name=name, card_num=card_num, cvv=security_code, user_id=current_user.id)
     db.session.add(payment_info)
     db.session.commit()
-    my_cart.clear()
-    session.pop("total")
+    my_cart.clear() # replace this to make a new cart of the user
+    session.pop("total") # set the payment status to true
     return render_template("payment_success.html", cost=cost)
 
 @app.route("/register", methods=["GET", "POST"])
