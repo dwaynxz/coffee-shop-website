@@ -1,6 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from flask_sqlalchemy import SQLAlchemy
-from menu import drinks, breakfast, desserts
 import secrets
 from extensions import db, bcrypt, login_manager
 from flask_login import login_user, logout_user, current_user,  login_required
