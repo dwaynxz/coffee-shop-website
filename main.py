@@ -21,6 +21,9 @@ def sum_cart(user_cart):
         total += item["price"]
     return total
 
+def get_unpaid_cart(user_id):
+    return Cart.query.filter_by(user_id=user_id, paid=False).first()
+
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.get(User, int(user_id))
@@ -54,7 +57,7 @@ def menu_3():
 
 @app.route("/cart")
 def cart():
-    cart = Cart.query.filter_by(user_id=current_user.id).first()
+    cart = get_unpaid_cart(user_id=current_user.id)
     if cart:
         cart_items = cart.cart_item
         total = 0
@@ -71,7 +74,8 @@ def cart():
 @login_required
 def add_cart():
     item_id = request.form.get("item_id")
-    cart_item = CartItem(cart_id=current_user.cart[0].cart_id, menu_item_id=int(item_id)) #
+    cart = get_unpaid_cart(user_id=current_user.id)
+    cart_item = CartItem(cart_id=cart.cart_id, menu_item_id=int(item_id))
     db.session.add(cart_item)
     db.session.commit()
     return redirect(url_for("menu"))
@@ -114,8 +118,12 @@ def payment_success():
     payment_info = PaymentInfo(name=name, card_num=card_num, cvv=security_code, user_id=current_user.id)
     db.session.add(payment_info)
     db.session.commit()
-    my_cart.clear() # replace this to make a new cart of the user
-    session.pop("total") # set the payment status to true
+    current_cart = get_unpaid_cart(user_id=current_user.id)
+    current_cart.paid = True
+    db.session.commit()
+    new_cart = Cart(user_id=current_user.id, paid=False, total=0)
+    db.session.add(new_cart)
+    db.session.commit()
     return render_template("payment_success.html", cost=cost)
 
 @app.route("/register", methods=["GET", "POST"])
