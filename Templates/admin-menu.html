@@ -28,8 +28,8 @@
               <td>{{item.image_url}}</td>
               <td>{{item.category}}</td>
               <td style="width: 50px">
-                <form action="{{ url_for('remove_item') }}" method="post">
-                  <input type="hidden" name="item" value="{{item.item_id}}">
+                <form action="{{ url_for('remove_menu_item') }}" method="post">
+                  <input type="hidden" name="item_id" value="{{item.item_id}}">
                   <button type="submit" class=" btn btn-danger btn-remove-item">Remove Item</button>
                 </form>
               </td>

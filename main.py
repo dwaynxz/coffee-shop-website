@@ -202,5 +202,18 @@ def admin_menu():
     menu_list = MenuItem.query.all()
     return render_template("admin-menu.html", menu=menu_list)
 
+@app.route("/remove-menu-item", methods=["POST"])
+def remove_menu_item():
+    menu_id = int(request.form.get("item_id"))
+    cart_items = CartItem.query.filter_by(menu_item_id=menu_id)
+    for item in cart_items:
+        db.session.delete(item)
+        db.session.commit()
+    menu_item = db.session.get(MenuItem, menu_id)
+    db.session.delete(menu_item)
+    db.session.commit()
+    flash(f"Removed {menu_item.name}", "success")
+    return redirect(url_for("admin_menu"))
+
 if __name__ == "__main__":
     app.run(debug=True)
