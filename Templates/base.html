@@ -46,5 +46,17 @@
   <footer>
     <p>©2025</p>
   </footer>
+  <script>
+    const right = document.querySelector(".right");
+    const left = document.querySelector(".left");
+    const rightHeight = getComputedStyle(right).height;
+    const leftHeight = getComputedStyle(left).height;
+    if (rightHeight<leftHeight){
+      left.style.height = rightHeight;
+    }
+    else if (leftHeight<rightHeight){
+      right.style.height = leftHeight;
+    }
+</script>
 </body>
 </html>
