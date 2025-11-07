@@ -197,5 +197,10 @@ def logout():
     flash("Logged out successfully", "success")
     return redirect(url_for("homepage"))
 
+@app.route("/admin/menu")
+def admin_menu():
+    menu_list = MenuItem.query.all()
+    return render_template("admin-menu.html", menu=menu_list)
+
 if __name__ == "__main__":
     app.run(debug=True)
