@@ -245,5 +245,9 @@ def add_menu_item():
     flash(f"Added {item_name} to menu items", "success")
     return redirect(url_for("admin_menu"))
 
+@app.route("/privacy-policy")
+def privacy_policy():
+    return render_template("privacy-policy.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

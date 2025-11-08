@@ -311,3 +311,12 @@ background-color: #6F4E37;
     background-color: #4c3827;
     color: #F8F4E1;
 }
+
+.footer-link:link, .footer-link:visited .footer-link:hover, .footer-link:active{
+  color: #424242;
+  text-decoration: none;
+  font-size: 15px;
+}
+.footer-link:hover, .footer-link:active {
+  text-decoration: underline;
+}
