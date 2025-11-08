@@ -158,7 +158,7 @@ def register():
                                 return render_template("register.html", forename=forename, lastname=lastname, email=email, password=password)
                             else:
                                 hashed_password = bcrypt.generate_password_hash(password)
-                                user = User(forename=forename, lastname=lastname, email=email, password=hashed_password)
+                                user = User(forename=forename, lastname=lastname, email=email, password=hashed_password, admin=False)
                                 db.session.add(user)
                                 db.session.commit()
                                 flash("Registered Successfully", "success")
@@ -249,6 +249,30 @@ def add_menu_item():
 @app.route("/privacy-policy")
 def privacy_policy():
     return render_template("privacy-policy.html")
+
+@app.route("/admin-login", methods=["GET", "POST"])
+def admin_login():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        if not email:
+            flash("Email field can't be empty", "error")
+            return render_template("admin-login")
+        if not password:
+            flash("Password field can't be empty")
+            return render_template("admin-login")
+        admin = User.query.filter_by(email=email).first()
+        if not admin.admin:
+            flash("This account is not an admin")
+            return redirect(url_for("admin_login"))
+        if not bcrypt.check_password_hash(admin.password, password):
+            flash("Incorrect password")
+            return redirect(url_for("admin_login"))
+        if current_user.is_authenticated:
+            logout_user()
+        login_user(admin)
+
+    return render_template("admin-login.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
