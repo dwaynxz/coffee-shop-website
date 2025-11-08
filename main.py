@@ -50,6 +50,7 @@ def menu_3():
     return render_template("menu_3.html", menu_desserts=menu_desserts)
 
 @app.route("/cart")
+@login_required
 def cart():
     cart = get_unpaid_cart(user_id=current_user.id)
     if cart:
