@@ -2,10 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import secrets
 from extensions import db, bcrypt, login_manager
 from flask_login import login_user, logout_user, current_user,  login_required
+import os
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secrets.token_hex(32)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///coffee_shop_db.db"
+UPLOAD_FOLDER = "static/images"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 db.init_app(app)
 bcrypt.init_app(app)
 login_manager.init_app(app)
@@ -213,6 +216,33 @@ def remove_menu_item():
     db.session.delete(menu_item)
     db.session.commit()
     flash(f"Removed {menu_item.name}", "success")
+    return redirect(url_for("admin_menu"))
+
+@app.route("/add-menu-item", methods=["POST"])
+def add_menu_item():
+    item_name = request.form.get("name")
+    price = float(request.form.get("price"))
+    image = request.files.get("image")
+    category = request.form.get("category")
+    if not item_name:
+        flash("Item name can't be empty", "error")
+        return render_template("admin-menu.html")
+    if not price:
+        flash("Price field can't be empty", "error")
+        return render_template("admin-menu.html",  name=item_name)
+    if not image:
+        flash("Please add an image", "error")
+        return render_template("admin-menu.html", name=item_name, price=price)
+    if not category:
+        flash("Category field can't be empty", "error")
+        return render_template("admin-menu.html", name=item_name, price=price)
+    filename = item_name+".png"
+    filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+    image.save(filepath)
+    new_menu_item = MenuItem(name=item_name, price=price, image_url=filename, category=category)
+    db.session.add(new_menu_item)
+    db.session.commit()
+    flash(f"Added {item_name} to menu items", "success")
     return redirect(url_for("admin_menu"))
 
 if __name__ == "__main__":

@@ -37,15 +37,15 @@
           {% endfor %}
         </table>
     <h1 class="menu-title">Add an item</h1>    
-    <form class="register-form w-50 p-3 mb-4" method="post" action="{{ url_for('register') }}">
+    <form class="register-form w-50 p-3 mb-4" method="post" action="{{ url_for('add_menu_item') }}" enctype="multipart/form-data">
         <label class="form-label">Menu item name</label>
         <input type="text" class="form-control" name="name" value="{{ name if name else '' }}"><br>
         <label class="form-label">Price</label>
         <input type="number" class="form-control" name="price" value="{{ price if price else '' }}"><br>
         <label class="form-label">Image file</label>
-        <input type="file" class="form-control" name="image" accept=".png, .jpg, .jpeg"><br>
+        <input type="file" class="form-control" name="image" accept=".png"><br>
         <label class="form-label">Category</label><br>
-        <select>
+        <select name="category">
             <option value="drink">Drink</option>
             <option value="breakfast">Breakfast</option>
             <option value="dessert">Dessert</option>
