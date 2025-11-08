@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     lastname = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
+    admin = db.Column(db.Boolean, nullable=False)
     cart = db.relationship("Cart", backref="user", lazy=True)
 
 class Cart(db.Model):
