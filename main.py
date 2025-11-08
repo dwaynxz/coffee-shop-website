@@ -271,6 +271,7 @@ def admin_login():
         if current_user.is_authenticated:
             logout_user()
         login_user(admin)
+        return redirect(url_for("admin_menu"))
 
     return render_template("admin-login.html")
 
