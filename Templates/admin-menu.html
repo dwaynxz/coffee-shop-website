@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block title %} Admin - Menu {% endblock %}
 {% block content %}
+{% if not current_user.admin %}
+  <div class="right d-flex flex-column align-items-center" style="min-height: 80vh; margin-top: 50px;">
+      <h1 class="admin-warning">YOU'RE NOT AN ADMIN</h1>
+      <span style="font-size:25px">If youre an admin <a style="color: black" href="{{ url_for('admin_login') }}">click here</a>.</span>
+{% else %}      
 <div class="right d-flex flex-column align-items-center" style="min-height: 80vh; margin-top: 50px;">
 
     <h1 class="menu-title">Admin Panel - Menu</h1>
@@ -53,4 +58,5 @@
         <button type="submit" class="btn btn-register-form">Add Item</button>
     </form>
 </div>
+{% endif %}
 {% endblock %}
