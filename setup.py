@@ -5,6 +5,7 @@ import time
 with app.app_context():
     db.create_all()
     print("Database tables created")
+    print("Wait")
     time.sleep(2)
     admin = User(forename="admin", lastname="123", password=bcrypt.generate_password_hash("admin123"), email="admin123@gmail.com", admin=True)
     db.session.add(admin)
