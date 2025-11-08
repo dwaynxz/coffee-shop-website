@@ -4,7 +4,7 @@ body {
 .main-div {
     position: relative;
 }
-a {
+.nav-links {
   color: white;
   text-decoration: none;
   font-size: 20px;
@@ -319,4 +319,8 @@ background-color: #6F4E37;
 }
 .footer-link:hover, .footer-link:active {
   text-decoration: underline;
+}
+.admin-warning {
+  font-size: 50px;
+  color: red;
 }
