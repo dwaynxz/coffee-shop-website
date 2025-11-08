@@ -208,6 +208,7 @@ def admin_menu():
     return render_template("admin-menu.html", menu=menu_list)
 
 @app.route("/remove-menu-item", methods=["POST"])
+@login_required
 def remove_menu_item():
     menu_id = int(request.form.get("item_id"))
     cart_items = CartItem.query.filter_by(menu_item_id=menu_id)
@@ -221,6 +222,7 @@ def remove_menu_item():
     return redirect(url_for("admin_menu"))
 
 @app.route("/add-menu-item", methods=["POST"])
+@login_required
 def add_menu_item():
     item_name = request.form.get("name")
     price = float(request.form.get("price"))
