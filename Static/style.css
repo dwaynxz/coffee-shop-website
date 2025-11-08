@@ -312,7 +312,7 @@ background-color: #6F4E37;
     color: #F8F4E1;
 }
 
-.footer-link:link, .footer-link:visited .footer-link:hover, .footer-link:active{
+.footer-link:link, .footer-link:visited, .footer-link:hover, .footer-link:active{
   color: #424242;
   text-decoration: none;
   font-size: 15px;
