@@ -25,6 +25,9 @@
           <a href="{{ url_for('about') }}" class="nav-links">About Us</a><br><br>
           <a href="{{ url_for('menu') }}" class="nav-links">Menu</a><br><br>
           <a href="{{url_for('contact')}}" class="nav-links">Contact</a><br><br>
+          {% if current_user.admin %}
+            <a href="{{ url_for('admin_menu') }}" class="nav-links">Admin Panel</a>
+          {% endif %}
         </nav>
       </div>
       <div class="right">
